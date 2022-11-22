@@ -1,0 +1,2 @@
+import{A as t}from"./index.d24d25c2.js";import"./index.0fd9ad24.js";import"./iframe.7db1fcf4.js";import"./index.9af8c312.js";import"./jsx-runtime.54fb130b.js";const c={title:"Data display/Avatar",component:t,args:{src:"https://github.com/felipemacci.png",alt:"Felipe Macci"},argTypes:{src:{control:{type:"text"}}}},p={},e={args:{src:void 0}},m=["Primary","WithFallback"];export{p as Primary,e as WithFallback,m as __namedExportsOrder,c as default};
+//# sourceMappingURL=Avatar.stories.cf45ed33.js.map
