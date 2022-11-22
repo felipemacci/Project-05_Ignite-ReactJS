@@ -45,7 +45,8 @@ var colors = {
   ignite300: "#00B37E",
   ignite500: "#00875F",
   ignite700: "#015F43",
-  ignite900: "#00291D"
+  ignite900: "#00291D",
+  test: "#FFF"
 };
 var space = {
   1: "0.25rem",
@@ -515,6 +516,182 @@ function MultiStep({ size, currentStep = 1 }) {
   });
 }
 MultiStep.displayName = "MultiStep";
+
+// src/components/Tooltip/index.tsx
+import * as TooltipElement from "@radix-ui/react-tooltip";
+
+// src/components/Tooltip/styles.ts
+import * as Tooltip from "@radix-ui/react-tooltip";
+var TooltipContent = styled(Tooltip.Content, {
+  display: "inline-block",
+  maxWidth: 320,
+  marginBottom: "$3",
+  padding: "$3 $4",
+  position: "relative",
+  textAlign: "center",
+  wordBreak: "break-word",
+  fontFamily: "$default",
+  fontSize: "$sm",
+  color: "$gray100",
+  background: "$gray900",
+  borderRadius: "$sm",
+  filter: "drop-shadow(4px 16px 24px rgba(0, 0, 0, 0.25))",
+  "&::after": {
+    display: "inline-block",
+    width: "$4",
+    height: "$2",
+    position: "absolute",
+    left: "50%",
+    bottom: "-$2",
+    transform: "translateX(-50%)",
+    content: "",
+    background: "inherit",
+    clipPath: "polygon(0% 0%, 50% 100%, 100% 0%)"
+  }
+});
+
+// src/components/Tooltip/index.tsx
+import { jsx as jsx5, jsxs as jsxs4 } from "react/jsx-runtime";
+function Tooltip2(_a) {
+  var _b = _a, { content, children } = _b, props = __objRest(_b, ["content", "children"]);
+  return /* @__PURE__ */ jsx5(TooltipElement.Provider, {
+    children: /* @__PURE__ */ jsxs4(TooltipElement.Root, __spreadProps(__spreadValues({}, props), {
+      children: [
+        /* @__PURE__ */ jsx5(TooltipElement.Trigger, {
+          asChild: true,
+          children
+        }),
+        /* @__PURE__ */ jsx5(TooltipElement.Portal, {
+          children: /* @__PURE__ */ jsx5(TooltipContent, {
+            children: content
+          })
+        })
+      ]
+    }))
+  });
+}
+Tooltip2.displayName = "Tooltip";
+
+// src/components/Toast/index.tsx
+import * as ToastElement from "@radix-ui/react-toast";
+import { X } from "phosphor-react";
+
+// src/components/Toast/styles.ts
+import * as Toast from "@radix-ui/react-toast";
+var VIEWPORT_PADDING = 25;
+var hide = keyframes({
+  "0%": { opacity: 1 },
+  "100%": { opacity: 0 }
+});
+var slideIn2 = keyframes({
+  from: { transform: `translateX(calc(100% + ${VIEWPORT_PADDING}px))` },
+  to: { transform: "translateX(0)" }
+});
+var swipeOut = keyframes({
+  from: { transform: "translateX(var(--radix-toast-swipe-end-x))" },
+  to: { transform: `translateX(calc(100% + ${VIEWPORT_PADDING}px))` }
+});
+var ToastViewport = styled(Toast.Viewport, {
+  position: "fixed",
+  bottom: 0,
+  right: 0,
+  display: "flex",
+  flexDirection: "column",
+  padding: VIEWPORT_PADDING,
+  gap: 10,
+  width: 390,
+  maxWidth: "100vw",
+  margin: 0,
+  listStyle: "none",
+  zIndex: 2147483647,
+  outline: "none"
+});
+var ToastRoot = styled(Toast.Root, {
+  display: "grid",
+  gridTemplateAreas: '"title close" "description close"',
+  gridTemplateColumns: "auto max-content",
+  width: 360,
+  padding: "$3 $5",
+  boxSizing: "border-box",
+  background: "$gray800",
+  border: "1px solid $gray600",
+  borderRadius: "$sm",
+  "@media (prefers-reduced-motion: no-preference)": {
+    '&[data-state="open"]': {
+      animation: `${slideIn2} 150ms cubic-bezier(0.16, 1, 0.3, 1)`
+    },
+    '&[data-state="closed"]': {
+      animation: `${hide} 100ms ease-in`
+    },
+    '&[data-swipe="move"]': {
+      transform: "translateX(var(--radix-toast-swipe-move-x))"
+    },
+    '&[data-swipe="cancel"]': {
+      transform: "translateX(0)",
+      transition: "transform 200ms ease-out"
+    },
+    '&[data-swipe="end"]': {
+      animation: `${swipeOut} 100ms ease-out`
+    }
+  }
+});
+var ToastTitle = styled(Toast.Title, {
+  gridArea: "title",
+  lineHeight: "$base",
+  color: "$gray100"
+});
+var ToastDescription = styled(Toast.Description, {
+  gridArea: "description",
+  marginTop: "$1",
+  lineHeight: "$base",
+  color: "$gray200"
+});
+var ToastClose = styled(Toast.Close, {
+  gridArea: "close",
+  width: "$5",
+  height: "$5",
+  color: "$gray200",
+  cursor: "pointer",
+  "&:hover": {
+    color: "$gray100"
+  }
+});
+
+// src/components/Toast/index.tsx
+import { jsx as jsx6, jsxs as jsxs5 } from "react/jsx-runtime";
+function Toast2(_a) {
+  var _b = _a, { title, description } = _b, props = __objRest(_b, ["title", "description"]);
+  return /* @__PURE__ */ jsxs5(ToastElement.Provider, {
+    swipeDirection: "right",
+    children: [
+      /* @__PURE__ */ jsxs5(ToastRoot, __spreadProps(__spreadValues({}, props), {
+        children: [
+          /* @__PURE__ */ jsx6(ToastTitle, {
+            asChild: true,
+            children: /* @__PURE__ */ jsx6(Heading, {
+              size: "sm",
+              children: title
+            })
+          }),
+          /* @__PURE__ */ jsx6(ToastClose, {
+            asChild: true,
+            children: /* @__PURE__ */ jsx6(X, {
+              weight: "bold"
+            })
+          }),
+          !!description && /* @__PURE__ */ jsx6(ToastDescription, {
+            asChild: true,
+            children: /* @__PURE__ */ jsx6(Text, {
+              size: "sm",
+              children: description
+            })
+          })
+        ]
+      })),
+      /* @__PURE__ */ jsx6(ToastViewport, {})
+    ]
+  });
+}
 export {
   Avatar2 as Avatar,
   Box,
@@ -524,5 +701,7 @@ export {
   MultiStep,
   Text,
   TextArea,
-  TextInput
+  TextInput,
+  Toast2 as Toast,
+  Tooltip2 as Tooltip
 };
